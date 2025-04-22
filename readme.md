@@ -1,6 +1,6 @@
 # PAMmla
 
-### PAMmla is a set of machine learnign models to predict SpCas9 PAM preference from amino acid sequence as described in the manuscript ***"Design of custom CRISPR-Cas9 PAM variant enzymes via scalable engineering and machine learning"*** (Silverstein et al. 2025).
+### PAMmla is a set of machine learning models to predict SpCas9 PAM preference from amino acid sequence as described in the manuscript ***"Design of custom CRISPR-Cas9 PAM variant enzymes via scalable engineering and machine learning"*** (Silverstein et al. 2025).
 [A web tool](https://pammla.streamlit.app/) to facilitate making predictions and running in silico directed evolution is also available.
 
 ![](pammla.png)
