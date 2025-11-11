@@ -42,6 +42,12 @@ The file is currently populated with inputs to generate example predictions for 
 
 Then run the script using ```python make_predictions.py```. This will create a folder in your running directory called 'predictions' which contains the output of the script in the form of a csv file.
 
+All inputs can also be supplied via command-line flags (see ```python make_predictions.py --help``` for the full list). Examples:
+
+- Score explicit variants: ```python make_predictions.py --pred-run-name my_run --saved-model-dir ./220924_NN_rand_seed0_ROS --chosen-muts LWKQQR DSGERT```
+- Read variants from a CSV: ```python make_predictions.py --pred-run-name my_run --chosen-muts-file variants.csv```
+- Randomize positions: ```python make_predictions.py --pred-run-name my_run --random-muts --n-samples 25 --positions-to-randomize D1135 S1136 G1218```
+
 ### Parameters:
  
 ```pred_run_name``` : A name to identify the run. Using a previously used name will overwrite previous results in the 'predictions' directory.
@@ -83,6 +89,14 @@ Then run the script using ```python evolve_vars.py```. This will create a folder
 This will generate a folder called ```evolved``` in the output directory containing evolution results. 
 
 The expected output of this example run can be found in ```evolved > NGT_selectivity_example > final_variants.csv```
+
+You can now configure the evolution run entirely from the command line. Use ```python evolve_vars.py --help``` to see every option. Key sequence inputs:
+
+- Provide starting sequences inline: ```python evolve_vars.py --starting-variants DSGERT LWKQQR```
+- Read starting sequences from a CSV file: ```python evolve_vars.py --starting-variants-file seeds.csv```
+- Begin from random variants: ```python evolve_vars.py --random-starting-variants```
+
+Specify multiple saved models by repeating ```--saved-model-dir```, for example ```--saved-model-dir ./220924_NN_rand_seed0_ROS --saved-model-dir ./220924_NN_rand_seed2_ROS```.
 
 
 ### Parameters
@@ -210,5 +224,4 @@ Minor differences compared to saved models may be observed due to differing rand
 
 The optimized linear model described in the manuscript can be reproduced by running the Jupyter notebook `AA_to_PAM_linear.ipynb` as-is.
 Further exploration of feature importance is also provided.
-
 
