@@ -174,8 +174,11 @@ def predict_from_saved_model(saved_model_dir, input_df, DATA_MEAN, DATA_STD, pam
     with open(saved_model_dir + "/encoder.pkl", 'rb') as read_file:
         train_test_enc = pkl.load(read_file)
         # Backwards compatibility: older sklearn encoders lack _infrequent_enabled used in newer versions
-        if isinstance(train_test_enc, OneHotEncoder) and not hasattr(train_test_enc, "_infrequent_enabled"):
-            train_test_enc._infrequent_enabled = False
+        if isinstance(train_test_enc, OneHotEncoder):
+            if not hasattr(train_test_enc, "_infrequent_enabled"):
+                train_test_enc._infrequent_enabled = False
+            if not hasattr(train_test_enc, "_drop_idx_after_grouping"):
+                train_test_enc._drop_idx_after_grouping = None
     if not PAM2AA: # regular AA to PAM model predictions
         # add one hot encoding of mutations
         muts_one_hot = train_test_enc.transform(input_df).toarray()
@@ -313,4 +316,3 @@ def ros_by_column(dataframe, column):
         slice.reset_index(drop=True)
         new_df = pd.concat([new_df, slice], axis=0, ignore_index=True)
     return new_df
-
